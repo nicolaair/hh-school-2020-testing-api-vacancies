@@ -4,14 +4,14 @@ import { IResponse } from './api.types'
 import { dataItemsToMultilineString } from './utils'
 
 (async () => {
-	const res: IResponse = await fetchVacancies(config.api.target)
+	const res: IResponse = await fetchVacancies(config.api.target.main.join(' '))
 
 	if (res.statusText === 'OK' && res.data.found > 0) {
 		const { found, items, pages } = res.data
 		const page = ++res.data.page
 		const perPage = res.data['per_page']
 
-		const vacancies = dataItemsToMultilineString(items, config.api.lengthId)
+		const vacancies = dataItemsToMultilineString(items, config.api.idLength)
 
 		console.log(vacancies)
 		console.log('—'.repeat(process.stdout.columns))

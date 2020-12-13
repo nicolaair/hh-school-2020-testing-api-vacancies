@@ -1,8 +1,13 @@
+interface ITarget {
+	main: string[]
+	alt: string[]
+}
+
 interface IApi {
 	url: string
 	authToken: string
-	target: string
-	lengthId: number
+	target: ITarget
+	idLength: number
 }
 
 export interface IConfig {

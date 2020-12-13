@@ -23,14 +23,27 @@ it('Has config param target', () => {
 })
 
 it('Valid param target', () => {
-	expect(config.api.target).not.toMatch(/[@$%^&><\\/|~`]/)
-	expect(config.api.target.length).toBeGreaterThan(0)
+	expect(config.api.target.main.length).toBeGreaterThan(0)
+	expect(config.api.target.alt.length).toBeGreaterThan(0);
+
+	[...config.api.target.main, ...config.api.target.alt].forEach(item => {
+		expect(item.length).toBeGreaterThan(0)
+		expect(item).not.toMatch(/[@$%^&><\\/|~`]/)
+	})
 })
 
-it('Has config param lengthId', () => {
-	expect(config.api.lengthId).not.toBeUndefined()
+it('Param target contain multiple word', async () => {
+	const mainPhrase = config.api.target.main.join(' ')
+	const altPhrase = config.api.target.alt.join(' ')
+
+	expect(mainPhrase.split(' ').length).toBeGreaterThan(1)
+	expect(altPhrase.split(' ').length).toBeGreaterThan(1)
+})
+
+it('Has config param idLength', () => {
+	expect(config.api.idLength).not.toBeUndefined()
 })
 
 it('Valid param url', () => {
-	expect(config.api.lengthId).toBeGreaterThanOrEqual(8)
+	expect(config.api.idLength).toBeGreaterThanOrEqual(8)
 })
